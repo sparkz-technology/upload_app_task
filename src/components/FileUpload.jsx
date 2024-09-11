@@ -1,21 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const FileUpload = ({ handleFileUpload, currentFile }) => {
-  const [selectedFile, setSelectedFile] = useState(null);
-
+const FileUpload = ({ handleFileUpload, currentFile, label }) => {
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
     handleFileUpload(event.target.files[0]);
   };
 
-  useEffect(() => {
-    setSelectedFile(currentFile);
-  }, [currentFile]);
+  useEffect(() => {}, [currentFile]);
 
   return (
     <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
       <h2 className="text-2xl font-bold mb-4 text-center">File Upload</h2>
+      {label && <p className="text-sm text-gray-600 mb-4">{label}</p>}
 
       <input
         type="file"
@@ -29,9 +25,9 @@ const FileUpload = ({ handleFileUpload, currentFile }) => {
                      mb-4"
       />
 
-      {selectedFile && (
+      {currentFile && (
         <p className="text-sm text-gray-600 mb-4">
-          Selected file: {selectedFile.name}
+          Selected file: {currentFile.name}
         </p>
       )}
     </div>
